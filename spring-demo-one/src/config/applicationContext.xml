@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- PROPERTIES FILES -->
+    <context:property-placeholder location="classpath:sport.properties"/>
+
+    <!-- BEAN DEFINITIONS -->
+    <bean id="myLoggerConfig" class="org.example.logging.MyLoggerConfig" init-method="initLogger">
+        <property name="rootLoggerLevel" value="FINE"/>
+        <property name="printedLoggerLevel" value="FINE"/>
+    </bean>
+
+    <bean id="myCoach" class="org.example.models.TrackCoach" >
+        <constructor-arg ref="myFortuneService" />      <!-- constructor dependency injection -->
+    </bean>
+
+    <bean id="myCricketCoach" class="org.example.models.CricketCoach">
+        <property name="fortuneService" ref="myFortuneService"/>        <!-- setter dependency injection -->
+
+        <property name="emailAddress" value="thebestcoach@mail.com"/>   <!-- setter dependency injection with literal value -->
+        <property name="team" value="Sunrisers Hyderabad"/>
+
+        <!-- Note that the age property will be resolved as integer -->
+        <property name="age" value="${foo.age}"/>                       <!-- setter dependency injection with value from .properties file -->
+        <property name="name" value="${foo.name}"/>
+    </bean>
+
+    <bean id="myGolfCoach" class="org.example.models.GolfCoach">
+        <constructor-arg ref="randomFortuneService"/>
+    </bean>
+
+    <bean id="myFortuneService" class="org.example.services.HappyFortuneService"/>
+    <bean id="randomFortuneService" class="org.example.services.RandomFortuneService"/>
+
+    <!-- Spring bean scopes -->
+    <!--
+        Available scopes
+        singleton       only one bean
+        prototype       new bean for each request
+        request         for web apps - new bean for every HTTP request
+        session         for web apps - new bean for every HTTP session
+        global-session  for web apps - new bean for every HTTP global session
+
+    -->
+</beans>
+
+
+
+
