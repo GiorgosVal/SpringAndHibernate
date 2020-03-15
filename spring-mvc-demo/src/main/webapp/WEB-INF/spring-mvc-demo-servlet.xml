@@ -3,19 +3,29 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
     	http://www.springframework.org/schema/beans/spring-beans.xsd
     	http://www.springframework.org/schema/context
     	http://www.springframework.org/schema/context/spring-context.xsd
     	http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- Step 3: Add support for component scanning -->
     <context:component-scan base-package="org.example.springmvcdemo" />
 
     <!-- Step 4: Add support for conversion, formatting and validation support -->
     <mvc:annotation-driven/>
+
+    <!-- STEP 6: Configure servlet to read the webapp/static folder for static context (images, CSS, JS scripts)-->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/myCustomUrl/**" location="/static/"/>
+
+    <!-- STEP 7: Configure servlet to read properties file -->
+    <util:properties id="carsOptions" location="WEB-INF/cars.properties"/>
 
     <!-- Step 5: Define Spring MVC view resolver -->
     <bean

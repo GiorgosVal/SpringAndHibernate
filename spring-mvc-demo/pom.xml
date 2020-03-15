@@ -18,6 +18,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <springframework.version>5.2.4.RELEASE</springframework.version>
+    <hibernatevalidator.version>6.1.2.Final</hibernatevalidator.version>
   </properties>
 
   <dependencies>
@@ -163,12 +164,12 @@
       <version>1.2</version>
     </dependency>
 
-<!--    &lt;!&ndash; https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api &ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>javax.servlet.jsp.jstl</groupId>-->
-<!--      <artifactId>jstl-api</artifactId>-->
-<!--      <version>1.2</version>-->
-<!--    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+    <dependency>
+      <groupId>javax.servlet.jsp.jstl</groupId>
+      <artifactId>jstl-api</artifactId>
+      <version>1.2</version>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/javax.servlet.jsp.jstl-api -->
     <dependency>
@@ -177,6 +178,57 @@
       <version>1.2.2</version>
     </dependency>
 
+    <!-- .................................. -->
+    <!-- BEAN VALIDATION DEPENDENCIES START -->
+    <!-- .................................. -->
+
+    <!-- Bean Validation API -->
+    <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>2.0.1.Final</version>
+    </dependency>
+
+    <!-- Hibernate implementation of Bean Validation API -->
+    <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernatevalidator.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator-annotation-processor -->
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator-annotation-processor</artifactId>
+      <version>${hibernatevalidator.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator-cdi -->
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator-cdi</artifactId>
+      <version>${hibernatevalidator.version}</version>
+    </dependency>
+
+    <!-- Expression Language API -->
+    <!-- https://mvnrepository.com/artifact/javax.el/javax.el-api -->
+    <dependency>
+      <groupId>javax.el</groupId>
+      <artifactId>javax.el-api</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+    <!-- Glassfish implementation of Expression Language API -->
+    <!-- https://mvnrepository.com/artifact/org.glassfish.web/el-impl -->
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>el-impl</artifactId>
+      <version>2.2</version>
+    </dependency>
+
+    <!-- ................................ -->
+    <!-- BEAN VALIDATION DEPENDENCIES END -->
+    <!-- ................................ -->
 
   </dependencies>
 
