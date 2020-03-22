@@ -1,43 +1,52 @@
 package org.example.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
-    private int employeeNumber;
+    @Column(name = "employee_id")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private int employeeId;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "first_name")
     private String firstName;
-    private String extension;
+
     private String email;
+
+    @Column(name = "office_code")
     private String officeCode;
+
+    @Column(name = "reports_to")
     private int reportsTo;
+
+    @Column(name = "job_title")
     private String jobTitle;
 
 
     public Employee(){}
 
-    public Employee(String lastName, String firstName, String extension, String email, String officeCode, int reportsTo, String jobTitle) {
+    public Employee(String lastName, String firstName, String email, String officeCode, int reportsTo, String jobTitle) {
         this.lastName = lastName;
         this.firstName = firstName;
-        this.extension = extension;
         this.email = email;
         this.officeCode = officeCode;
         this.reportsTo = reportsTo;
         this.jobTitle = jobTitle;
     }
 
-    public int getEmployeeNumber() {
-        return employeeNumber;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployeeNumber(int employeeNumber) {
-        this.employeeNumber = employeeNumber;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getLastName() {
@@ -54,14 +63,6 @@ public class Employee {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getExtension() {
-        return extension;
-    }
-
-    public void setExtension(String extension) {
-        this.extension = extension;
     }
 
     public String getEmail() {
@@ -99,10 +100,9 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeNumber=" + employeeNumber +
+                "employeeNumber=" + employeeId +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", extension='" + extension + '\'' +
                 ", email='" + email + '\'' +
                 ", officeCode='" + officeCode + '\'' +
                 ", reportsTo=" + reportsTo +

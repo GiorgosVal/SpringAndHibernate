@@ -12,7 +12,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        String url = "jdbc:mysql://localhost:3306/classicmodels?useSSL=false&serverTimezone=UTC";
+        String url = "jdbc:mysql://localhost:3306/hibernate_tutorial?useSSL=false&serverTimezone=UTC";
         String user = "val";
         String pass = "giorgaras";
 
