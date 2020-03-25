@@ -5,10 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class UpdateEmployee {
+public class DeleteEmployee {
 
     public static void main(String[] args) {
 
@@ -22,29 +19,23 @@ public class UpdateEmployee {
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            Employee employee = session.get(Employee.class, 2);
+            Employee employee = session.get(Employee.class, 8);
             System.out.println("Employee retrieved: " + employee);
 
-            System.out.println("Updating employee...");
-            employee.setLastName("Pappadopoulou");
+            System.out.println("Deleting employee...");
+            session.delete(employee);
+
             session.getTransaction().commit();
             System.out.println("Done.\n");
 
 
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            System.out.println("Updating all employees...");
-            session.createQuery("update Employee set reportsTo = 2 where employeeId not between 1 and 2").executeUpdate();
-            session.createQuery("update Employee set reportsTo = 1 where employeeId = 2").executeUpdate();
-            session.createQuery("update Employee set reportsTo = 0 where employeeId = 1").executeUpdate();
-            session.getTransaction().commit();
-            System.out.println("Done.");
 
-            session = sessionFactory.getCurrentSession();
-            session.beginTransaction();
-            Employee employee1 = session.get(Employee.class, 1);
-            employee1.setDateOfBirth(new SimpleDateFormat("dd/MM/yyyy").parse("14/11/1987"));
+            session.createQuery("delete from Employee where employeeId = 7").executeUpdate();
+
             session.getTransaction().commit();
+
 
         } catch (Exception e) {
             System.out.println("Transaction was not completed.");

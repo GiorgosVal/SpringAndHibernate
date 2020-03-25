@@ -18,7 +18,7 @@ public class CreateEmployee {
 
         try {
             System.out.println("Creating a new Employee object...");
-            Employee employee = new Employee("Giorgos", "Val", "gio@val.com", "7", 1002, "Sales Rep");
+            Employee employee = new Employee("Paraskevi", "Sarrioglou", "psarri@val.com", "16", 102, "Sales Rep");
 
             System.out.println("Starting transaction...");
             session.beginTransaction();
