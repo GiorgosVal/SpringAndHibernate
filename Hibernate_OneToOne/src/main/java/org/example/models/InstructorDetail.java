@@ -1,0 +1,58 @@
+package org.example.models;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "instructor_details")
+public class InstructorDetail {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "youtube_channel")
+    private String youTubeChannel;
+
+    private String hobby;
+
+    public InstructorDetail() {
+    }
+
+    public InstructorDetail(String youTubeChannel, String hobby) {
+        this.youTubeChannel = youTubeChannel;
+        this.hobby = hobby;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getYouTubeChannel() {
+        return youTubeChannel;
+    }
+
+    public void setYouTubeChannel(String youTubeChannel) {
+        this.youTubeChannel = youTubeChannel;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
+    }
+
+    @Override
+    public String toString() {
+        return "InstructorDetail{" +
+                "id=" + id +
+                ", youTubeChannel='" + youTubeChannel + '\'' +
+                ", hobby='" + hobby + '\'' +
+                '}';
+    }
+}
