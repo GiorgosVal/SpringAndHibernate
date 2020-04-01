@@ -20,21 +20,23 @@ public class CustomerDAOImpl implements CustomerDAO {
     public List<Customer> getCustomers() {
         Session session = sessionFactory.getCurrentSession();
 
-        Query<Customer> query = session.createQuery("from Customer", Customer.class);
+        Query<Customer> query = session.createQuery("from Customer order by lastName", Customer.class);
         List<Customer> customers = query.getResultList();
 
         return customers;
     }
 
     @Override
-    public Customer getCustomer() {
-
-        return null;
+    public Customer getCustomer(int id) {
+        return sessionFactory.getCurrentSession().get(Customer.class, id);
     }
 
     @Override
     public boolean updateCustomer(Customer customer) {
-        return false;
+        Session session = sessionFactory.getCurrentSession();
+        session.merge(customer);
+        System.out.println("Updating customer..." + customer);
+        return true;
     }
 
     @Override
@@ -43,7 +45,19 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
+    public boolean deleteCustomerById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("delete from Customer where id=:customerId");
+        query.setParameter("customerId", id);
+        query.executeUpdate();
+        return false;
+    }
+
+    @Override
     public boolean saveCustomer(Customer customer) {
+        sessionFactory.getCurrentSession().persist(customer);
+        System.out.println("Saving customer..." + customer);
         return false;
     }
 }
