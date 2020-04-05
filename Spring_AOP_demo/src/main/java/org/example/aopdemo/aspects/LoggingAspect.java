@@ -4,9 +4,11 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
+@Order(2)
 @Component
 public class LoggingAspect {
 
@@ -84,6 +86,13 @@ public class LoggingAspect {
     @After("forDaoNoGetterSetter()")
     public void afterAnyDaoMethodNotGetterOrSetter_2() {
         System.out.println("==> @After advice on ANY DAO method excluding getters/setters 2.\n");
+    }
+
+
+
+    @Before("org.example.aopdemo.aspects.AopExpressions.daoNoGetterSetter()")
+    public void performLogging() {
+        System.out.println("\n==> Performing Logging.");
     }
 
 
