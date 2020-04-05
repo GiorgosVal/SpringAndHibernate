@@ -11,8 +11,9 @@ public class MainDemoApp {
 
         AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
         accountDAO.addAccount();
-
-
+        accountDAO.method_1();
+        accountDAO.setNumber(1);
+        accountDAO.getNumber();
         context.close();
 
 
