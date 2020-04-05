@@ -1,5 +1,7 @@
 package org.example.aopdemo.aspects;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -91,8 +93,17 @@ public class LoggingAspect {
 
 
     @Before("org.example.aopdemo.aspects.AopExpressions.daoNoGetterSetter()")
-    public void performLogging() {
+    public void performLogging(JoinPoint joinPoint) {
         System.out.println("\n==> Performing Logging.");
+
+        Signature signature = joinPoint.getSignature();
+        System.out.println("Method called: " + signature.toString());
+
+        Object[] arguments = joinPoint.getArgs();
+        for(Object arg : arguments) {
+            System.out.println("Argument: " + arg.toString());
+        }
+
     }
 
 
