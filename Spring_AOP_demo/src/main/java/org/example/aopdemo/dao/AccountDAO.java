@@ -38,6 +38,24 @@ public class AccountDAO {
         return accounts;
     }
 
+    public String getSomeValue(boolean throwException) {
+
+        if(throwException) {
+            throw  new RuntimeException("getSomeValue exception!!");
+        }
+
+        return "some value";
+    }
+
+    public String getSomeValue_2(boolean throwException) {
+
+        if(throwException) {
+            throw  new RuntimeException("getSomeValue exception!!");
+        }
+
+        return "some value";
+    }
+
 
     public int getNumber() {
         logger.info(getClass() + " getNumber...");

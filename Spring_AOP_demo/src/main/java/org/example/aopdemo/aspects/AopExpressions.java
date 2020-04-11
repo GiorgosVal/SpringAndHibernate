@@ -22,4 +22,10 @@ public class AopExpressions {
 
     @Pointcut("execution(* org.example.aopdemo.dao.AccountDAO.findAccounts(..))")
     protected void findAccounts(){}
+
+    @Pointcut("execution(* org.example.aopdemo.dao.AccountDAO.getSomeValue(..))")
+    protected void getSomeValue(){}
+
+    @Pointcut("execution(* org.example.aopdemo.dao.AccountDAO.getSomeValue_2(..))")
+    protected void getSomeValue_2(){}
 }

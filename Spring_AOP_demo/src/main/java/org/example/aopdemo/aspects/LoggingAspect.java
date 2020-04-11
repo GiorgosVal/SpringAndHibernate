@@ -152,6 +152,33 @@ public class LoggingAspect {
 
 
 
+    @Around("org.example.aopdemo.aspects.AopExpressions.getSomeValue()")
+    public Object aroundgetSomeValueAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        Object object;
+
+        try {
+            object = proceedingJoinPoint.proceed();
+        } catch (Exception e) {
+            logger.warning(e.getMessage());
+            object = "Some value by AOP handling.";
+        }
+
+        return object;
+    }
+
+    @Around("org.example.aopdemo.aspects.AopExpressions.getSomeValue_2()")
+    public Object aroundgetSomeValue_2Advice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        Object object;
+
+        try {
+            object = proceedingJoinPoint.proceed();
+        } catch (Exception e) {
+            logger.warning(e.getMessage());
+            throw e;
+        }
+
+        return object;
+    }
 
 
 

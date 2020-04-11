@@ -22,18 +22,27 @@ public class MainDemoApp {
         //accountDAO.method_2(3, "some string", new Account("Giorgos", "Boss"));
         //accountDAO.setNumber(1);
         //accountDAO.getNumber();
-        logger.info("\nBefore the actual line of code that calls the method.");
-        List<Account> accountList = null;
 
-        try {
-            boolean throwException = false;
-            accountList = accountDAO.findAccounts(throwException);
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Main program... exception caught. " + e.toString());
-        }
+//        logger.info("\nBefore the actual line of code that calls the method.");
+//        List<Account> accountList = null;
+//
+//        try {
+//            boolean throwException = false;
+//            accountList = accountDAO.findAccounts(throwException);
+//        } catch (Exception e) {
+//            logger.log(Level.SEVERE, "Main program... exception caught. " + e.toString());
+//        }
+//
+//        logger.info("\nAfter the actual line of code that called the method.");
+//        accountList.forEach(a -> logger.info(a.toString()));
 
-        logger.info("\nAfter the actual line of code that called the method.");
-        accountList.forEach(a -> logger.info(a.toString()));
+
+//        String value = accountDAO.getSomeValue(false);
+//        logger.info(value);
+
+        String value_2 = accountDAO.getSomeValue_2(true);
+        logger.info(value_2);
+
         context.close();
 
 
