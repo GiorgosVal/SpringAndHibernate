@@ -286,7 +286,20 @@
     <!-- ................................................................... -->
     <!-- B E A N    V A L I D A T I O N    D E P E N D E N C I E S    E N D  -->
     <!-- ................................................................... -->
-
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>annotations</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+    <!-- ..................... -->
+    <!--     A S P E C T J     -->
+    <!-- ..................... -->
+    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.5</version>
+    </dependency>
 
   </dependencies>
 
