@@ -2,12 +2,12 @@ package org.example.aopdemo.aspects;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
+import org.example.aopdemo.models.Account;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Aspect
 @Order(2)
@@ -103,7 +103,18 @@ public class LoggingAspect {
         for(Object arg : arguments) {
             System.out.println("Argument: " + arg.toString());
         }
+    }
 
+    @AfterReturning(pointcut = "org.example.aopdemo.aspects.AopExpressions.findAccounts()", returning = "result")
+    public void afterReturning(List<Account> result) {
+        System.out.println("\n===> Start of @AfterReturning advice.");
+        result.forEach(System.out::println);
+        System.out.println("===> End of @AfterReturning advice.\n");
+        postProcessData(result);
+    }
+
+    private void postProcessData(List<Account> accounts) {
+        accounts.forEach(account -> account.setLevel(account.getLevel().toUpperCase()));
     }
 
 

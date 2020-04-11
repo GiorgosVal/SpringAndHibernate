@@ -19,4 +19,7 @@ public class AopExpressions {
 
     @Pointcut("dao() && !(daoGetters() || daoSetters())")
     protected void daoNoGetterSetter(){}
+
+    @Pointcut("execution(* org.example.aopdemo.dao.AccountDAO.findAccounts())")
+    protected void findAccounts(){}
 }
