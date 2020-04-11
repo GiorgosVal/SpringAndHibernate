@@ -5,25 +5,32 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Component
 public class AccountDAO {
-
+    
+    private Logger logger = Logger.getLogger(getClass().getSimpleName());
     private int number;
 
     public void addAccount() {
-        System.out.println(getClass() + " Adding an account...");
+        logger.info(getClass() + " Adding an account...");
     }
 
     public void method_1(){
-        System.out.println(getClass() + " method_1...");
+        logger.info(getClass() + " method_1...");
     }
 
     public void method_2(int number, String string, Account account){
-        System.out.println(getClass() + " method_2...");
+        logger.info(getClass() + " method_2...");
     }
 
-    public List<Account> findAccounts() {
+    public List<Account> findAccounts(boolean throwException) {
+
+        if(throwException) {
+            throw  new RuntimeException("findAccounts exception!!");
+        }
+
         List<Account> accounts = new ArrayList<>();
         accounts.add(new Account("Giorgos", "Silver"));
         accounts.add(new Account("Maria", "Gold"));
@@ -33,12 +40,12 @@ public class AccountDAO {
 
 
     public int getNumber() {
-        System.out.println(getClass() + " getNumber...");
+        logger.info(getClass() + " getNumber...");
         return number;
     }
 
     public void setNumber(int number) {
-        System.out.println(getClass() + " setNumber...");
+        logger.info(getClass() + " setNumber...");
         this.number = number;
     }
 }

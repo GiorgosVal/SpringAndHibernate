@@ -1,6 +1,7 @@
 package org.example.aopdemo.aspects;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.example.aopdemo.models.Account;
@@ -8,11 +9,14 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Aspect
 @Order(2)
 @Component
 public class LoggingAspect {
+
+    private Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     private final String POINTCUT_DECLARATION = "execution(public void method_1())";
 
@@ -56,65 +60,94 @@ public class LoggingAspect {
     //@Before("execution(void addAccount(int, ..) throws *)")
 
     public void beforeAddAccountAdvice() {
-        System.out.println("\n==> @Before advice on addAccount().");
+        logger.info("\n==> @Before advice on addAccount().");
     }
 
 
     @Before(POINTCUT_DECLARATION)
     public void beforeMethod_1() {
-        System.out.println("\n==> @Before advice on method_1().");
+        logger.info("\n==> @Before advice on method_1().");
     }
 
     @After(POINTCUT_DECLARATION)
     public void afterMethod_1() {
-        System.out.println("==> @After advice on method_1().\n");
+        logger.info("==> @After advice on method_1().\n");
     }
 
     @Before("forDaoPackage() && !(forDaoGetters() || forDaoSetters())")
     public void beforeAnyDaoMethodNotGetterOrSetter() {
-        System.out.println("\n==> @Before advice on ANY DAO method excluding getters/setters 1.");
+        logger.info("\n==> @Before advice on ANY DAO method excluding getters/setters 1.");
     }
 
     @After("forDaoPackage() && !(forDaoGetters() || forDaoSetters())")
     public void afterAnyDaoMethodNotGetterOrSetter() {
-        System.out.println("==> @After advice on ANY DAO method excluding getters/setters 1.\n");
+        logger.info("==> @After advice on ANY DAO method excluding getters/setters 1.\n");
     }
 
     @Before("forDaoNoGetterSetter()")
     public void beforeAnyDaoMethodNotGetterOrSetter_2() {
-        System.out.println("\n==> @Before advice on ANY DAO method excluding getters/setters 2.");
+        logger.info("\n==> @Before advice on ANY DAO method excluding getters/setters 2.");
     }
 
     @After("forDaoNoGetterSetter()")
     public void afterAnyDaoMethodNotGetterOrSetter_2() {
-        System.out.println("==> @After advice on ANY DAO method excluding getters/setters 2.\n");
+        logger.info("==> @After advice on ANY DAO method excluding getters/setters 2.\n");
     }
 
 
 
     @Before("org.example.aopdemo.aspects.AopExpressions.daoNoGetterSetter()")
     public void performLogging(JoinPoint joinPoint) {
-        System.out.println("\n==> Performing Logging.");
+        logger.info("\n==> Performing Logging.");
 
         Signature signature = joinPoint.getSignature();
-        System.out.println("Method called: " + signature.toString());
+        logger.info("Method called: " + signature.toString());
 
         Object[] arguments = joinPoint.getArgs();
         for(Object arg : arguments) {
-            System.out.println("Argument: " + arg.toString());
+            logger.info("Argument: " + arg.toString());
         }
     }
 
     @AfterReturning(pointcut = "org.example.aopdemo.aspects.AopExpressions.findAccounts()", returning = "result")
-    public void afterReturning(List<Account> result) {
-        System.out.println("\n===> Start of @AfterReturning advice.");
+    public void afterReturning(JoinPoint joinPoint, List<Account> result) {
+        logger.info("\n===> @AfterReturning START advice on method: " + joinPoint.getSignature().toString());
         result.forEach(System.out::println);
-        System.out.println("===> End of @AfterReturning advice.\n");
+        logger.info("===> @AfterReturning END advice on method: " + joinPoint.getSignature().toString() + "\n");
         postProcessData(result);
     }
 
     private void postProcessData(List<Account> accounts) {
         accounts.forEach(account -> account.setLevel(account.getLevel().toUpperCase()));
+    }
+
+
+    @AfterThrowing(pointcut = "org.example.aopdemo.aspects.AopExpressions.findAccounts()", throwing = "anException")
+    public void afterThrowingFindAccountsAdvice(JoinPoint joinPoint, Throwable anException) {
+        logger.info("\n===> @AfterThrowing advice on method: " + joinPoint.getSignature().toString());
+        logger.info("\n===> @AfterThrowing advice: The exception is " + anException.toString());
+    }
+
+    @After("org.example.aopdemo.aspects.AopExpressions.findAccounts()")
+    public void afterFindAccountsAdvice(JoinPoint joinPoint) {
+        logger.info("\n===> @After advice on method: " + joinPoint.getSignature().toString());
+    }
+
+    @Around("org.example.aopdemo.aspects.AopExpressions.findAccounts()")
+    public Object aroundFindAccountsAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        logger.info("\n===> @Around advice on method: " + proceedingJoinPoint.getSignature().toString());
+
+        long start = System.currentTimeMillis();
+        Object object = proceedingJoinPoint.proceed();
+        long end = System.currentTimeMillis();
+        logger.info("===> @Around method time to execute: " + (end - start) + "ms.");
+
+        return object;
+    }
+
+    @Before("org.example.aopdemo.aspects.AopExpressions.findAccounts()")
+    public void aroundFindAccountsAdvice(JoinPoint joinPoint) {
+        logger.info("\n===> @Before advice on method: " + joinPoint.getSignature().toString());
     }
 
 
