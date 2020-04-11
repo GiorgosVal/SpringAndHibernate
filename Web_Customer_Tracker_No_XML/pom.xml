@@ -102,7 +102,6 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-indexer</artifactId>
       <version>${springframework.version}</version>
-      <scope>optional</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
     <dependency>
@@ -269,22 +268,25 @@
       <artifactId>el-impl</artifactId>
       <version>2.2</version>
     </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>5.4.10.Final</version>
-      <scope>compile</scope>
-    </dependency>
+
+    <!-- ................................................................... -->
+    <!-- B E A N    V A L I D A T I O N    D E P E N D E N C I E S    E N D  -->
+    <!-- ................................................................... -->
 
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>annotations</artifactId>
       <version>3.0.1</version>
     </dependency>
-
-    <!-- ................................................................... -->
-    <!-- B E A N    V A L I D A T I O N    D E P E N D E N C I E S    E N D  -->
-    <!-- ................................................................... -->
+    <!-- ..................... -->
+    <!--     A S P E C T J     -->
+    <!-- ..................... -->
+    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.5</version>
+    </dependency>
 
 
   </dependencies>
