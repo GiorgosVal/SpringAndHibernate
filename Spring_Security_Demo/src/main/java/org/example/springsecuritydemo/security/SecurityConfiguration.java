@@ -27,12 +27,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()    // restrict access based on HttpServletRequest
-                .anyRequest().authenticated()   // any request to the app must be authenticated (logged in)
+        http.authorizeRequests()              // restrict access based on HttpServletRequest
+                .anyRequest().authenticated() // any request to the app must be authenticated (logged in)
                 .and()
-                .formLogin()                // override Spring Security default login form
-                .loginPage("/login-form")   // configure request mapping
-                .loginProcessingUrl("/authenticateUser")    // configure mapping on form POST
-                .permitAll();       // allow anyone to see the login page
+                .formLogin()                             // override Spring Security default login form
+                .loginPage("/login-form")                // configure request mapping
+                .loginProcessingUrl("/authenticateUser") // configure mapping on form POST
+                .permitAll()                             // allow anyone to see the login page
+                .and()
+                .logout()                                // enable logout
+                .permitAll();                            // allow anyone to logout
     }
 }
