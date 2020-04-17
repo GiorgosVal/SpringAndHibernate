@@ -13,10 +13,10 @@ public class DemoController {
         return "landing-page";
     }
 
-    @GetMapping("/employees")
-    public String showEmployees() {
-        return "employees-home";
-    }
+//    @GetMapping("/employees")
+//    public String showEmployees() {
+//        return "employees-home";
+//    }
 
     @GetMapping("/leaders")
     public String showLeeders() {

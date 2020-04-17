@@ -1,5 +1,6 @@
 package org.example.springsecuritydemo.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,25 +8,21 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 
+import javax.sql.DataSource;
+
 import static org.springframework.security.core.userdetails.User.UserBuilder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private DataSource securityDataSource;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        UserBuilder builder = User.withDefaultPasswordEncoder();
-
-        auth.inMemoryAuthentication()
-                .withUser(builder.username("john").password("1234").roles("EMPLOYEE"))
-                .withUser(builder.username("mary").password("1234").roles("EMPLOYEE", "MANAGER"))
-                .withUser(builder.username("susan").password("1234").roles("EMPLOYEE", "ADMIN"))
-                .withUser(builder.username("george").password("1234").roles("ASSOCIATE"));
-
-        // super.configure(auth);
+        auth.jdbcAuthentication().dataSource(securityDataSource);
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -47,6 +44,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling().accessDeniedPage("/forbidden");  // custom access denied page
     }
 
+    /**
+     * Configuration used for in-memory authentication.
+     * @param auth
+     * @throws Exception
+     */
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        UserBuilder builder = User.withDefaultPasswordEncoder();
+//
+//        auth.inMemoryAuthentication()
+//                .withUser(builder.username("john").password("1234").roles("EMPLOYEE"))
+//                .withUser(builder.username("mary").password("1234").roles("EMPLOYEE", "MANAGER"))
+//                .withUser(builder.username("susan").password("1234").roles("EMPLOYEE", "ADMIN"))
+//                .withUser(builder.username("george").password("1234").roles("ASSOCIATE"));
+//
+//        // super.configure(auth);
+//    }
 
     /**
      * With this configuration the application lands on login form on startup.
