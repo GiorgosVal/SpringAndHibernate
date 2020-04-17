@@ -8,10 +8,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class DemoController {
 
-    @GetMapping()
+    @GetMapping("/")
     public String showHome() {
-        return "home";
+        return "landing-page";
     }
 
+    @GetMapping("/employees")
+    public String showEmployees() {
+        return "employees-home";
+    }
+
+    @GetMapping("/leaders")
+    public String showLeeders() {
+        return "leaders-home";
+    }
+
+    @GetMapping("/systems")
+    public String showSystems() {
+        return "systems-home";
+    }
+
+    @GetMapping("/forbidden")
+    public String showAccessDenied() {
+        return "access-denied";
+    }
 
 }
