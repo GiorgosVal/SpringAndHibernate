@@ -211,6 +211,14 @@
       <artifactId>spring-security-config</artifactId>
       <version>${springsecurity.version}</version>
     </dependency>
+    <!-- Used to access user roles in JSP page -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${springsecurity.version}</version>
+    </dependency>
+
 
 
 

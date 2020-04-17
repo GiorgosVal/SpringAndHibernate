@@ -19,6 +19,13 @@
 </head>
 <body>
 
+<!--
+	form:form will automatically include an hidden input field with the generated csrf token like
+	<input type="hidden" name="_csrf" value="fa11321d-0aaa-4cf6-a582-733fa9a2a9a4">
+
+	If a simple form element is used instead of form:form then the input field must be added manually:
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+-->
     <form:form action="${pageContext.request.contextPath}/authenticateUser" method="POST">
         <h2>Please sign in</h2>
         <c:if test="${param.error != null}">
