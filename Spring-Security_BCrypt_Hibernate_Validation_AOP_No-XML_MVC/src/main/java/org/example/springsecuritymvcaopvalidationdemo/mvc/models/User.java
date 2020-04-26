@@ -1,19 +1,17 @@
 package org.example.springsecuritymvcaopvalidationdemo.mvc.models;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
 public class User {
 
     @Id
@@ -62,7 +60,44 @@ public class User {
         this.roles = roles;
     }
 
+    public void addRoleToUser(Role role) {
+        if(Objects.isNull(roles)) {
+            roles = new ArrayList<>();
+        }
 
+        if(!roles.contains(role)) {
+            roles.add(role);
+        }
+    }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, firstName, lastName, email);
+    }
 }

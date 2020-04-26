@@ -1,6 +1,5 @@
-package org.example.springsecuritymvcaopvalidationdemo.security.config;
+package org.example.springsecuritymvcaopvalidationdemo.security;
 
-import org.example.springsecuritymvcaopvalidationdemo.mvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsServiceImpl;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
@@ -32,14 +31,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").hasRole("EMPLOYEE")
+                .antMatchers("/").permitAll()
+                .antMatchers("/stuff/**").hasRole("EMPLOYEE")
                 .antMatchers("/leaders/**").hasRole("MANAGER")
                 .antMatchers("/systems/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                     .loginPage("/login-page")
                     .loginProcessingUrl("/authenticateUser")
-                    .successHandler(customAuthenticationSuccessHandler)
+                    .successHandler(customAuthenticationSuccessHandler) // defines the strategy on successful authentication
                     .permitAll()
                 .and()
                 .logout()
@@ -57,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsServiceImpl);
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }

@@ -1,4 +1,4 @@
-package org.example.springsecuritymvcaopvalidationdemo.security.config;
+package org.example.springsecuritymvcaopvalidationdemo.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

@@ -1,7 +1,8 @@
-package org.example.springsecuritymvcaopvalidationdemo.mvc.services;
+package org.example.springsecuritymvcaopvalidationdemo.security;
 
 import org.example.springsecuritymvcaopvalidationdemo.mvc.models.Role;
 import org.example.springsecuritymvcaopvalidationdemo.mvc.models.User;
+import org.example.springsecuritymvcaopvalidationdemo.mvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,13 +19,14 @@ import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Service
+@Service(value = "userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserService userService;
 
     private Logger logger = Logger.getLogger(UserDetailsServiceImpl.class.getSimpleName());
+    private static final String ROLE_SUFFIX = "ROLE_";
 
     @Override
     @Transactional
@@ -49,7 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         for(Role role : user.getRoles()) {
             logger.info("UserRole : " + role);
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+            authorities.add(new SimpleGrantedAuthority(ROLE_SUFFIX + role.getRole()));
         }
         logger.info("authorities : " + authorities);
         return authorities;
@@ -63,6 +65,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * @return
      */
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toList());
+        return roles.stream().map(role -> new SimpleGrantedAuthority(ROLE_SUFFIX + role.getRole())).collect(Collectors.toList());
     }
 }

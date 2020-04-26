@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.logging.Logger;
 
-@Repository
+@Repository(value = "roleDao")
 public class RoleDaoImpl implements RoleDao {
 
     @Autowired
@@ -19,6 +19,7 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role findRoleByName(String name) {
+        logger.info("Going to search for role: " + name);
         Session session = sessionFactory.getCurrentSession();
         Query<Role> query = session.createQuery("from Role where role=:roleName", Role.class);
         query.setParameter("roleName", name);
@@ -28,7 +29,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (Exception e) {
             logger.severe(e.toString());
         }
-
+        logger.info("Role to be returned: " + role);
         return role;
     }
 }

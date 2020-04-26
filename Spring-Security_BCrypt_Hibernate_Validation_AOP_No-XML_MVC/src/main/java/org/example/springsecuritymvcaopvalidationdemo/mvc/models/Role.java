@@ -1,18 +1,16 @@
 package org.example.springsecuritymvcaopvalidationdemo.mvc.models;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "roles")
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
 public class Role {
 
     @Id
@@ -23,10 +21,38 @@ public class Role {
     @Column(name = "role")
     private String role;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
+
     public Role() {
     }
 
     public Role(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role1 = (Role) o;
+        return id == role1.id &&
+                Objects.equals(role, role1.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, role);
     }
 }

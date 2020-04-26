@@ -12,7 +12,7 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
     private Matcher matcher;
     private String message;
 
-    private static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[ !@#$%^&*()_=~\\[\\]{}|;:,.?])[A-Za-z\\d !@#$%^&*()_=~\\[\\]{}|;:,.?]$";
+    private static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[ !@#$%^&*()_=~\\[\\]{}|;:,.?])[A-Za-z\\d !@#$%^&*()_=~\\[\\]{}|;:,.?]{8,}$";
 
     @Override
     public void initialize(Password constraintAnnotation) {
