@@ -18,8 +18,16 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <springframework.version>5.2.5.RELEASE</springframework.version>
+    <springsecurity.version>5.3.1.RELEASE</springsecurity.version>
+    <hibernate.version>5.4.14.Final</hibernate.version>
+    <hibernate.validator.version>6.1.2.Final</hibernate.validator.version>
+    <mysql.connector.java.version>8.0.19</mysql.connector.java.version>
+    <mchange.c3p0.version>0.9.5.2</mchange.c3p0.version>
     <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+    <javax.servlet.jsp-api.version>2.3.1</javax.servlet.jsp-api.version>
+<!--    <javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>-->
     <jackson-databind.version>2.11.0</jackson-databind.version>
+    <javax.json.bind-api.version>1.0</javax.json.bind-api.version>
     <lombok.version>1.18.10</lombok.version>
   </properties>
 
@@ -41,6 +49,61 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${springframework.version}</version>
     </dependency>
+
+    <!-- Spring ORM - An umbrella module that covers many persistence technologies such as JPA, JDO, Hibernate and iBatis.-->
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${springframework.version}</version>
+    </dependency>
+
+    <!-- Spring Transactions -->
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${springframework.version}</version>
+    </dependency>
+    <!-- .......................................................................................................... -->
+
+
+    <!-- .......................................................................................................... -->
+    <!-- HIBERNATE CORE DEPENDENCIES START -->
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+    <!-- Used for Database connection pooling -->
+    <!-- Used if com.mchange.c3p0 dependency is not used -->
+    <!-- https://www.baeldung.com/hibernate-c3p0 -->
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
+    <!--<dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-c3p0</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>-->
+    <!-- .......................................................................................................... -->
+
+    <!-- .......................................................................................................... -->
+    <!-- MySQL AND C3P0 SUPPORT START -->
+
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.connector.java.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+    <dependency>
+      <groupId>com.mchange</groupId>
+      <artifactId>c3p0</artifactId>
+      <version>${mchange.c3p0.version}</version>
+    </dependency>
     <!-- .......................................................................................................... -->
 
     <!-- .......................................................................................................... -->
@@ -52,6 +115,14 @@
       <artifactId>jackson-databind</artifactId>
       <version>${jackson-databind.version}</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/javax.json.bind/javax.json.bind-api -->
+    <dependency>
+      <groupId>javax.json.bind</groupId>
+      <artifactId>javax.json.bind-api</artifactId>
+      <version>${javax.json.bind-api.version}</version>
+    </dependency>
+
     <!-- .......................................................................................................... -->
 
     <!-- .......................................................................................................... -->
@@ -64,7 +135,33 @@
       <artifactId>javax.servlet-api</artifactId>
       <version>${javax.servlet-api.version}</version>
     </dependency>
+    <!-- used for JSP pages -->
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>${javax.servlet.jsp-api.version}</version>
+    </dependency>
+    <!-- Java Standard Tag Library - used in JSP -->
+    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+<!--    <dependency>-->
+<!--      <groupId>javax.servlet</groupId>-->
+<!--      <artifactId>jstl</artifactId>-->
+<!--      <version>${javax.servlet.jstl.version}</version>-->
+<!--    </dependency>-->
     <!-- .......................................................................................................... -->
+
+
+    <!-- .......................................................................................................... -->
+    <!-- HIBERNATE VALIDATOR DEPENDENCIES -->
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate.validator.version}</version>
+    </dependency>
+    <!-- .......................................................................................................... -->
+
 
     <!-- .......................................................................................................... -->
     <!-- OTHER DEPENDENCIES -->
