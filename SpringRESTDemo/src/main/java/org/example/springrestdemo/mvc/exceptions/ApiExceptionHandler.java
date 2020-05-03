@@ -57,5 +57,17 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);    // body, status code
     }
 
+    @ExceptionHandler
+    public ResponseEntity<ApiResponse> handleException(InvalidCredentialsException exception) {
+        // body of the response
+        ApiResponse response = new ApiResponse();
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setMessage(exception.getMessage());
+        response.setTimestamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);    // body, status code
+    }
+
+
 
 }

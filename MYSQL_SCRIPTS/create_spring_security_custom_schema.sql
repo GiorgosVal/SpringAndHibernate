@@ -42,7 +42,7 @@ INSERT INTO `spring_security_custom_user`.`users` (username, password, first_nam
 ('susan','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Susan','Adams','susan@gmail.com');
 
 INSERT INTO `spring_security_custom_user`.`roles` (role) VALUES
-('ROLE_EMPLOYEE'),('ROLE_MANAGER'),('ROLE_ADMIN'), ('ROLE_CUSTOMER'), ('ROLE_ASSOCIATE');
+('EMPLOYEE'),('MANAGER'),('ADMIN'), ('CUSTOMER'), ('ASSOCIATE');
 
 INSERT INTO `spring_security_custom_user`.`users_roles` (user_id, role_id) VALUES
 (1,1),
