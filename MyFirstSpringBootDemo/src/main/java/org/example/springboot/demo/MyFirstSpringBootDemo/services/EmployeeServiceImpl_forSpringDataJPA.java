@@ -1,49 +1,50 @@
 package org.example.springboot.demo.MyFirstSpringBootDemo.services;
 
-import org.example.springboot.demo.MyFirstSpringBootDemo.dao.EmployeeDAO;
 import org.example.springboot.demo.MyFirstSpringBootDemo.dao.EmployeeDAOSpringDataJpa;
 import org.example.springboot.demo.MyFirstSpringBootDemo.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service (value = "employeeService")
-@Transactional
-public class EmployeeServiceImpl implements EmployeeService {
+//@Transactional      // No need for @Transactional - JpaRepository provides it
+public class EmployeeServiceImpl_forSpringDataJPA implements EmployeeService {
 
-    private EmployeeDAO employeeDAO;
     private EmployeeDAOSpringDataJpa employeeDAOSpringDataJpa;
 
     @Autowired
-    public EmployeeServiceImpl(@Qualifier("employeeDAOJpaImpl") EmployeeDAO employeeDAO) {
-        this.employeeDAO = employeeDAO;
-    }
-
-    @Autowired
-    public EmployeeServiceImpl(EmployeeDAOSpringDataJpa employeeDAOSpringDataJpa) {
+    public EmployeeServiceImpl_forSpringDataJPA(EmployeeDAOSpringDataJpa employeeDAOSpringDataJpa) {
         this.employeeDAOSpringDataJpa = employeeDAOSpringDataJpa;
     }
 
     @Override
     public List<Employee> findAll() {
-        return this.employeeDAO.findAll();
+        return this.employeeDAOSpringDataJpa.findAll();
     }
 
     @Override
     public Employee findById(int id) {
-        return this.employeeDAO.findById(id);
+        Optional<Employee> optional = employeeDAOSpringDataJpa.findById(id);
+        Employee employee;
+
+        if (optional.isPresent()) {
+            employee = optional.get();
+        } else {
+            throw new RuntimeException("Did not find the employee id: " + id);
+        }
+
+        return employee;
     }
 
     @Override
     public void save(Employee employee) {
-        this.employeeDAO.save(employee);
+        this.employeeDAOSpringDataJpa.save(employee);
     }
 
     @Override
     public void deleteById(int id) {
-        this.employeeDAO.deleteById(id);
+        this.employeeDAOSpringDataJpa.deleteById(id);
     }
 }
