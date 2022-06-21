@@ -21,7 +21,7 @@
     <springsecurity.version>5.3.1.RELEASE</springsecurity.version>
     <hibernate.version>5.4.14.Final</hibernate.version>
     <hibernate.validator.version>6.1.2.Final</hibernate.validator.version>
-    <mysql.connector.java.version>8.0.19</mysql.connector.java.version>
+    <mysql.connector.java.version>8.0.28</mysql.connector.java.version>
     <mchange.c3p0.version>0.9.5.4</mchange.c3p0.version>
     <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
     <javax.servlet.jsp-api.version>2.3.1</javax.servlet.jsp-api.version>
